@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Bookcase.Database;
+﻿using Bookcase.Database;
+using Bookcase.Models;
+using Bookcase.Models.Repositories;
+using Bookcase.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +28,9 @@ namespace Bookcase
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<IRepository<Book>, BookRepository>();
+            services.AddTransient<IRepository<Category>, CategoryRepository>();
+            services.AddTransient(typeof(IService<>), typeof(Service<>));
             services.AddTransient<DbContext, BookContext>();
 
             services.AddDbContext<BookContext>(ConfigureConnection);

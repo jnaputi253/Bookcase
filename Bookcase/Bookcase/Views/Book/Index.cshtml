@@ -1,0 +1,39 @@
+﻿@using Bookcase.Models
+@model IQueryable<Book>
+
+@{
+    ViewBag.Title = "Books";
+    Layout = "_Layout";
+}
+
+<div class="bg-primary panel-body">
+    <h2>Books</h2>
+</div>
+<table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Category</th>
+    </tr>
+    </thead>
+    <tbody>
+    @if (!Model.Any())
+    {
+        <tr>
+            <td colspan="3" class="text-center">You have no books</td>
+        </tr>
+    }
+    else
+    {
+        foreach (Book book in Model)
+        {
+            <tr>
+                <td>@book.Title</td>
+                <td>@book.Author</td>
+                <td>@book.Category.Name</td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>

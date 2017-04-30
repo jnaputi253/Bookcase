@@ -13,6 +13,10 @@ namespace Bookcase.Models
         [Required]
         public string Author { get; set; }
 
+        [StringLength(64)]
+        [Required]
+        public string Title { get; set; }
+
         [StringLength(32)]
         [Required]
         public string Isbn { get; set; }
@@ -24,6 +28,7 @@ namespace Bookcase.Models
         [ForeignKey("CategoryID")]
         public int CategoryID { get; set; }
 
-        public Category Category { get; set; }
+        [Required]
+        public virtual Category Category { get; set; }
     }
 }
